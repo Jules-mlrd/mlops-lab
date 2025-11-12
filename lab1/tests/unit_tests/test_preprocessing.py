@@ -11,9 +11,16 @@ This test suite ensures:
 Each test uses fixtures defined in `conftest.py` for reproducibility.
 """
 
+import sys
 import pandas as pd
 from pathlib import Path
-from lab1.src.lab1.data_preprocessing.preprocessing import load_data, clean_data, save_data
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+SRC_DIR = PROJECT_ROOT / "lab1" / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from lab1.data_preprocessing.preprocessing import load_data, clean_data, save_data
 
 
 
@@ -61,13 +68,11 @@ def test_load_data(raw_census_data_path):
 def test_clean_data(raw_census_data_df):
     """Ensure clean_data() removes duplicates, strips whitespace, and drops NaNs."""
 
-    # 👉 YOUR CODE HERE:
-    # - Call clean_data() using raw_census_data_df
-    # - Check that:
-    #   → All column names are stripped (no whitespace)
-    #   → No duplicates remain
-    #   → No missing values remain
-    pass
+    cleaned_df = clean_data(raw_census_data_df)
+
+    assert all(col == col.strip() for col in cleaned_df.columns), "Column names contain whitespace"
+    assert cleaned_df.duplicated().sum() == 0, "Duplicates were not removed"
+    assert cleaned_df.isna().sum().sum() == 0, "Missing values remain after cleaning"
 
 
 # -------------------------------------------------------------------
@@ -76,12 +81,15 @@ def test_clean_data(raw_census_data_df):
 def test_save_data(clean_census_data_df, clean_census_data_path):
     """Ensure save_data() writes cleaned data correctly to expected path."""
 
-    # 👉 YOUR CODE HERE:
-    # - Save data using save_data()
-    # - Assert that the saved file exists
-    # - Read the file back using pandas
-    # - Validate:
-    #   → Column names are clean (no whitespace)
-    #   → No duplicates
-    #   → No missing values
-    pass
+    output_filename = "test_clean_output.csv"
+    output_path = save_data(clean_census_data_df, output_filename)
+
+    assert output_path.exists(), "Output file was not created"
+
+    saved_df = pd.read_csv(output_path)
+    try:
+        assert all(col == col.strip() for col in saved_df.columns), "Saved column names contain whitespace"
+        assert saved_df.duplicated().sum() == 0, "Saved dataset contains duplicates"
+        assert saved_df.isna().sum().sum() == 0, "Saved dataset contains missing values"
+    finally:
+        output_path.unlink(missing_ok=True)

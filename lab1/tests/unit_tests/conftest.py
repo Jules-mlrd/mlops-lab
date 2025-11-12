@@ -19,7 +19,7 @@ from pathlib import Path
 # -------------------------------------------------------------------
 #  Global Constants and Configuration
 # -------------------------------------------------------------------
-PROJECT_ROOT: Path = Path(__file__).resolve().parents[4]
+PROJECT_ROOT: Path = Path(__file__).resolve().parents[3]
 DATASTORE_DIR: Path = PROJECT_ROOT / "datastores"
 
 CENSUS_RAW_DATA_PATH: Path = DATASTORE_DIR / "raw_data" / "census.csv"
@@ -59,11 +59,9 @@ def clean_census_data_path() -> Path:
     Raises:
         pytest.UsageError: If the file does not exist.
     """
-    # 👉 YOUR CODE HERE:
-    # - Check if CLEAN_CENSUS_DATA_PATH exists
-    # - If not, fail the test session
-    # - Return CLEAN_CENSUS_DATA_PATH
-    pass
+    if not CLEAN_CENSUS_DATA_PATH.exists():
+        pytest.fail(f"[DataError] Clean CSV file not found at: {CLEAN_CENSUS_DATA_PATH}")
+    return CLEAN_CENSUS_DATA_PATH
 
 
 @pytest.fixture(scope="function")
@@ -101,8 +99,9 @@ def clean_census_data_df(clean_census_data_path) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned census dataset.
     """
-    # 👉 YOUR CODE HERE:
-    # - Load the cleaned CSV file
-    # - Handle FileNotFoundError or other exceptions
-    # - Return DataFrame
-    pass
+    try:
+        return pd.read_csv(clean_census_data_path)
+    except FileNotFoundError:
+        pytest.fail(f"[DataLoadError] Clean CSV file not found at: {clean_census_data_path}")
+    except Exception as exc:
+        pytest.fail(f"[DataLoadError] Failed to load cleaned CSV from {clean_census_data_path}: {exc}")
