@@ -6,7 +6,7 @@ In this lab, you will learn the core foundations of MLOps, including:
 
 * **Code versioning** using Git
 * **Data versioning** with DVC
-* **Pipeline modularity** 
+* **Pipeline modularity**
 * **Best practices** in Python: logging, type hints, docstrings, CLI, and code quality with pre-commit hooks
 * **Continuous Integration (CI)** automation using GitHub Actions
 * **Environment management** with Conda and Poetry
@@ -24,7 +24,7 @@ Before starting, ensure the following are installed:
 * **Python 3.11 or higher**
 * **Miniconda / Anaconda** – [Installation guide](https://www.anaconda.com/docs/getting-started/miniconda/main)
 
-## Step 1: Fork the Repository 
+## Step 1: Fork the Repository
 
 Forking allows you to have your own GitHub copy to push changes and experiment safely.
 
@@ -150,6 +150,3 @@ We use **GitHub** because:
 * Integrates seamlessly with CI/CD pipelines via GitHub Actions.
 * Supports collaborative development with pull requests and code reviews.
 * Public visibility allows sharing and contributing to open-source projects.
-
-
-

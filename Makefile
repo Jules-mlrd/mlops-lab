@@ -28,7 +28,7 @@ env-create:
 # Update conda environment
 env-update:
 	@echo "=> Updating conda environment from conda.yaml (env: $(CONDA_ENV))"
-	conda env update -f conda.yaml 
+	conda env update -f conda.yaml
 	@echo "=> Conda environment '$(CONDA_ENV)' updated successfully."
 
 # ======================================================================
@@ -97,4 +97,3 @@ test:
 
 all: install-dependencies install-hooks update-dependencies update-hooks run-hooks clean-data test
 	@echo "All tasks completed successfully."
-

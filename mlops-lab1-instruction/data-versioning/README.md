@@ -163,5 +163,3 @@ Check that the file `journal.txt` has been restored correctly.
 | Snapshot tagging     | `git tag`                             | Marks a specific data version for future reference       |
 | Switch data versions | `git checkout <tag>` + `dvc checkout` | Restore a previous dataset version                       |
 | Remote sharing       | `dvc remote add` + `dvc push`         | Share datasets with your team via local or cloud storage |
-
-

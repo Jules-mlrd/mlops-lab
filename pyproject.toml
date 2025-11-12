@@ -34,3 +34,6 @@ dev = [
     "black (>=25.9.0,<26.0.0)",
     "pytest (>=9.0.1,<10.0.0)"
 ]
+
+[tool.isort]
+profile = "black"

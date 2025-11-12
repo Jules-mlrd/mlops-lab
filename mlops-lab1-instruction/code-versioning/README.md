@@ -236,4 +236,3 @@ git push origin master
 Learn about **branches, tags, and merges** to collaborate and manage repositories like a professional **MLOps engineer**: [About Git](https://git-scm.com/about)
 
 You can collaborate with different groups of people in different ways simultaneously within the same project
-

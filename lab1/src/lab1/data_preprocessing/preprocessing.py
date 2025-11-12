@@ -9,24 +9,24 @@ This script:
 - Saves the cleaned dataset to a standardized datastore path
 
 Usage Example:
-    python data_preprocessing.py --input_data_path data/raw/raw_dataset.csv --output_data_path clean_dataset.csv
+    python data_preprocessing.py \
+        --input_data_path data/raw/raw_dataset.csv \
+        --output_data_path clean_dataset.csv
 """
 
-from pathlib import Path
-from typing import Union
-import pandas as pd
-import numpy as np
-import os
-import sys
 import argparse
 import logging
+import sys
+from pathlib import Path
+from typing import Union
 
+import pandas as pd
 
 # -------------------------------------------------------------------
 #  Global Configuration
 # -------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
-DATASTORE_DIR = PROJECT_ROOT / "datastores" 
+DATASTORE_DIR = PROJECT_ROOT / "datastores"
 
 OUTPUT_DIR = DATASTORE_DIR / "clean_data"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -49,6 +49,7 @@ logger = logging.getLogger("data_preprocessing")
 
 logger.info(f"PROJECT_ROOT: {PROJECT_ROOT}")
 
+
 # -------------------------------------------------------------------
 #  Functions
 # -------------------------------------------------------------------
@@ -69,7 +70,7 @@ def load_data(input_data_path: Union[str, Path]) -> pd.DataFrame:
         df = pd.read_csv(input_path)
         logger.info(f"Successfully loaded dataset with shape {df.shape}")
         return df
-    
+
     except FileNotFoundError:
         logger.error(f"Input file not found: {input_path}")
         sys.exit(1)
@@ -134,7 +135,9 @@ def parse_arguments() -> argparse.Namespace:
         "--input_data_path",
         type=str,
         required=True,
-        help="Path to the raw input CSV file (e.g., ../datastores/raw_data/data.csv).",
+        help=(
+            "Path to the raw input CSV file (e.g., ../datastores/raw_data/data.csv)."
+        ),
     )
 
     parser.add_argument(
@@ -142,7 +145,7 @@ def parse_arguments() -> argparse.Namespace:
         type=str,
         required=True,
         default="clean_census.csv",
-        help="Output filename (will be stored under ../datastores/clean_data/)",
+        help=("Output filename (will be stored under ../datastores/clean_data/)"),
     )
 
     return parser.parse_args()

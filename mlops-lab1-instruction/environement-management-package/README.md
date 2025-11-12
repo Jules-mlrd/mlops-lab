@@ -168,7 +168,7 @@ conda doctor -n mlops_env
 Check for any dependency conflicts within your environment:
 
 ```bash
-pip check 
+pip check
 ```
 
 ---
@@ -218,5 +218,3 @@ pip check
 | **poetry** | Python dependency and packaging tool  | Lockfile reproducibility and version pinning    |
 | **uv**     | Modern Rust-based environment manager | High performance and lockfile-based             |
 | **pip**    | Python package installer              | Simple and lightweight                          |
-
-

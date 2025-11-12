@@ -13,7 +13,7 @@ In this section, you’ll learn how to **format**, **lint**, and **validate** yo
 * **Black** — automatic code formatter
 * **isort** — organizes your imports cleanly
 * **Flake8** — checks code style and detects common errors
-* **Pre-commit** — automates these checks each time you commit code 
+* **Pre-commit** — automates these checks each time you commit code
 
 Learn more: [https://pre-commit.com](https://pre-commit.com)
 
@@ -103,7 +103,7 @@ cd mlops-lab
 
 ### Step 2 — Configure `.pre-commit-config.yaml`
 
-Check that your configuration file defines the necessary hooks. Ensure your `.pre-commit-config.yaml` file includes all necessary hooks (e.g., black, isort, flake8, end-of-file-fixer, etc.). 
+Check that your configuration file defines the necessary hooks. Ensure your `.pre-commit-config.yaml` file includes all necessary hooks (e.g., black, isort, flake8, end-of-file-fixer, etc.).
 
 `Edit or complete it where indicated by ## your code here`
 
@@ -177,4 +177,3 @@ or
 ```bash
 poetry run pre-commit run --all-files
 ```
-
